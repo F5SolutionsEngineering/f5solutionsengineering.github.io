@@ -1,0 +1,67 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+
+<script>
+{% assign counter = 0 %}
+var documents = [{% for project in site.projects %}
+  {
+    "id": {{ counter }},
+    "name": "{{ project.name }}",
+    "tags": "{% for tag in project.tags %}{{ tag }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}",
+    "link": "{{ project.link }}",
+    "body": "{{ project.content | markdownify | replace: '.', '. ' | replace: '</h2>', ': ' | replace: '</h3>', ': ' | replace: '</h4>', ': ' | replace: '</p>', ' ' | strip_html | strip_newlines | replace: '  ', ' ' | replace: '"', ' ' }}"
+    {% assign counter = counter | plus: 1 %}
+  }{% if forloop.last %}{% else %}, {% endif %}{% endfor %}
+];
+
+var idx = lunr(function () {
+    this.ref('id')
+    this.field('tags', {boost: 10})
+    this.field('name')
+    this.field('body')
+
+    documents.forEach(function (doc) {
+        this.add(doc)
+    }, this)
+});
+function lunr_search(term) {
+    document.getElementById('lunrsearchresults').innerHTML = '<ul></ul>';
+    if(term) {
+        document.getElementById('lunrsearchresults').innerHTML = "<p>Search results for '" + term + "'</p>" + document.getElementById('lunrsearchresults').innerHTML;
+        //put results on the screen.
+        var results = idx.search(term);
+        if(results.length>0){
+            //console.log(idx.search(term));
+            //if results
+            for (var i = 0; i < results.length; i++) {
+                // more statements
+                var ref = results[i]['ref'];
+                var link = documents[ref]['link'];
+                var name = documents[ref]['name'];
+                var tags = documents[ref]['tags'];
+                var body = documents[ref]['body'].substring(0,160)+'...';
+                document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML = document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML + "<li class='lunrsearchresult'><a href='" + link + "'><span class='title'>" + name + "</span><br /><span class='body'>"+ body +"</span><br /><span class='url'>"+ link +"</span></a></li>";
+            }
+        } else {
+            document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML = "<li class='lunrsearchresult'>No results found...</li>";
+        }
+    }
+    return false;
+}
+</script>
+<style>
+    #lunrsearchresults {padding-top: 0.2rem;}
+    .lunrsearchresult {padding-bottom: 1rem;}
+    .lunrsearchresult .name {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .name {text-decoration: underline;}
+</style>
+
+
+<form onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <p>Search: <input type="text" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Search projects" /></p>
+</form>
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>

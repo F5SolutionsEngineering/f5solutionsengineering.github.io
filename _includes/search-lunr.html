@@ -2,22 +2,24 @@
 
 <script>
 {% assign counter = 0 %}
-var documents = [{% for project in site.projects %}
+var documents = [
+  {% for repository in site.github.public_repositories %}
+  {% if repository.has_pages == true %}
   {
     "id": {{ counter }},
-    "name": "{{ project.name }}",
-    "tags": "{% for tag in project.tags %}{{ tag }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}",
-    "link": "{{ project.link }}",
-    "body": "{{ project.content | markdownify | replace: '.', '. ' | replace: '</h2>', ': ' | replace: '</h3>', ': ' | replace: '</h4>', ': ' | replace: '</p>', ' ' | strip_html | strip_newlines | replace: '  ', ' ' | replace: '"', ' ' }}"
+    "name": "{{ repository.name }}",
+    "topics": "{% for topic in repository.topics %}{{ topic }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}",
+    "link": "{{ site.baseurl }}/{{ repository.name }}",
+    "description": "{{ repository.description }}"
     {% assign counter = counter | plus: 1 %}
-  }{% if forloop.last %}{% else %}, {% endif %}{% endfor %}
+  }{% if forloop.last %}{% else %}, {% endif %}{% endif %}{% endfor %}
 ];
 
 var idx = lunr(function () {
     this.ref('id')
-    this.field('tags', {boost: 10})
+    this.field('topics', {boost: 10})
     this.field('name')
-    this.field('body')
+    this.field('description')
 
     documents.forEach(function (doc) {
         this.add(doc)
@@ -37,9 +39,9 @@ function lunr_search(term) {
                 var ref = results[i]['ref'];
                 var link = documents[ref]['link'];
                 var name = documents[ref]['name'];
-                var tags = documents[ref]['tags'];
-                var body = documents[ref]['body'].substring(0,160)+'...';
-                document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML = document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML + "<li class='lunrsearchresult'><a href='" + link + "'><span class='title'>" + name + "</span><br /><span class='body'>"+ body +"</span><br /><span class='url'>"+ link +"</span></a></li>";
+                var tags = documents[ref]['topics'];
+                var body = documents[ref]['description'].substring(0,160)+'...';
+                document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML = document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML + "<li class='lunrsearchresult'><a href='" + link + "'><span class='title'>" + name + "</span><br /><span class='body'>"+ description +"</span><br /><span class='url'>"+ link +"</span></a></li>";
             }
         } else {
             document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML = "<li class='lunrsearchresult'>No results found...</li>";

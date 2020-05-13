@@ -4,9 +4,12 @@
 
 layout: page
 ---
+# Project Pages
 {% include search-lunr.html %}
-{% for project in site.projects %}
-<h2><a href="{{ project.link }}"> {{ project.name }}</a></h2>
-<p>{{ project.content | markdownify }}</p>
-<small>Tags: {% for tag in project.tags %}{{ tag }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}</small>
+{% for repository in site.github.public_repositories %}
+{% if repository.has_pages == true %}
+# [{{ repository.name }}]({{ repository.html_url }}) 
+{{ repository.description }}
+###### Topics : {% for topic in repository.topics %}{{ topic }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}
+{% endif %}
 {% endfor %}

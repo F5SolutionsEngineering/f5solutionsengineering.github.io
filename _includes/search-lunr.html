@@ -40,7 +40,7 @@ function lunr_search(term) {
                 var link = documents[ref]['link'];
                 var name = documents[ref]['name'];
                 var tags = documents[ref]['topics'];
-                var body = documents[ref]['description'].substring(0,160)+'...';
+                var description = documents[ref]['description'].substring(0,160)+'...';
                 document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML = document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML + "<li class='lunrsearchresult'><a href='" + link + "'><span class='title'>" + name + "</span><br /><span class='body'>"+ description +"</span><br /><span class='url'>"+ link +"</span></a></li>";
             }
         } else {

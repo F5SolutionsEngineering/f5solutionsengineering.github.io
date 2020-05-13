@@ -6,7 +6,11 @@ layout: page
 ---
 {% include search-lunr.html %}
 {% for project in site.projects %}
-  <h2><a href="{{ project.link }}"> {{ project.name }}</a></h2>
-  <p>{{ project.content | markdownify }}</p>
-  <small>Tags: {% for tag in project.tags %}{{ tag }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}</small>
+<h2><a href="{{ project.link }}"> {{ project.name }}</a></h2>
+<p>{{ project.content | markdownify }}</p>
+<small>Tags: {% for tag in project.tags %}{{ tag }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}</small>
+{% endfor %}
+
+{% for repository in site.github.public_repositories %}
+* [{{ repository.name }}]({{ repository.html_url }})
 {% endfor %}

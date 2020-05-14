@@ -4,6 +4,6 @@
 
 layout: default
 ---
+{% include search-lunr.html %}
 {% include header.html %}
-{% include search_results.html %}
 {% include categories.html %}

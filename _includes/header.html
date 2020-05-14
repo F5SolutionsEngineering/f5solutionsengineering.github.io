@@ -1,5 +1,4 @@
   <header>
-
       <div class="header container align-items-center justify-content-center">
           <div class="header--block size margin container column">
               <div class="header--block--text">
@@ -10,8 +9,10 @@
                       <div class="header--block--input--icon">
                           <span class="feather-icon icon-search"></span>
                       </div>
-                      <input class="input-search" type="text" name="" value=""
-                          placeholder="Search for name, tags, descriptions..." id="search-input">
+                      <form onSubmit="return lunr_search(document.getElementById('lunrsearch').value);return false">
+                          <input class="input-search" type="text" id="lunrsearch" name="q" maxlength="255" value=""
+                              placeholder="Search Projects Pages" />
+                      </form>
                   </div>
                   <div class="header--block--result">
                       <ul id="results-container"></ul>
@@ -19,6 +20,4 @@
               </div>
           </div>
       </div>
-
-
   </header>

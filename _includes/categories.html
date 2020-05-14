@@ -1,0 +1,24 @@
+<div class="content-post">
+    <div class="size margin">
+        <div class="">
+            {% for category in site.categories %}
+            <a href="{{ category.url }}" class="list-item container">
+
+                <div class="list-item-icon container align-items-center justify-content-center">
+                    <span class="feather-icon icon-{{ category.icon }}"></span>
+                </div>
+
+                <div class="flex-grow-1">
+                    <div class="">
+                        <h2 class="list-post-title">{{ category.name }}</h2>
+                    </div>
+
+                    <div class="">
+                        <span class="list-post-description">{{ category.description }}</span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>

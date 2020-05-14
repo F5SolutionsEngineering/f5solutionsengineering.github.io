@@ -8,7 +8,7 @@ layout: page
 # Project Pages
 {% for repository in site.github.public_repositories %}
 {% if repository.has_pages == true %}
-# [{{ repository.name }}]({{ repository.html_url }}) 
+# [{{ repository.name }}]({{ site.baseurl }}/{{ repository.name }}) 
 {{ repository.description }}
 ###### Topics : {% for topic in repository.topics %}{{ topic }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}
 {% endif %}

@@ -26,6 +26,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://f5solutionsengineering.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 color_theme: "#0c5c8d"
 color_text: "#fff"
+repository: F5SolutionsEngineering/f5solutionsengineering.github.io
 # twitter_username: jekyllrb
 # github_username: f5solutionsengineering
 
@@ -33,6 +34,7 @@ color_text: "#fff"
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-github-metadata
 
 collections:
   categories:

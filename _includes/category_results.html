@@ -2,8 +2,7 @@
     <h1 class="post-title">{{ page.name }} Projects</h1>
     Returning results for repositories with a topic of: {{ page.topic }}
     {% for repository in site.github.public_repositories %}
-    {{ repository }}
-    {% if repository.topics contains {{ page.topic }} %}
+    {% if repository.topics contains "training" %}
     <div class="margin-top-20 margin-bottom-50">
         <a href="{{ site.url }}/{{ repository.name }}">
             <h2 class="post-title">{{ repository.name }}</h2>
@@ -13,6 +12,7 @@
             {% for topic in repository.topics %}{{ topic }}{% if forloop.last %}{% else %},{% endif %}{% endfor %}</small>
     </div>
     {% endif %}
+    {{ repository }}
     {% endfor %}
     {% unless site.github.public_repositories %}
     <div class="margin-top-20 margin-bottom-50">

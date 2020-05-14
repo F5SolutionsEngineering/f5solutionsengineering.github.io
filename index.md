@@ -4,8 +4,8 @@
 
 layout: page
 ---
-# Project Pages
 {% include search-lunr.html %}
+# Project Pages
 {% for repository in site.github.public_repositories %}
 {% if repository.has_pages == true %}
 # [{{ repository.name }}]({{ repository.html_url }}) 

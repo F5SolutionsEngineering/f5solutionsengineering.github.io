@@ -44,7 +44,7 @@ function lunr_search(term) {
 
                 appendString += '<a href="{{ site.url }}/' + name + '" class="list-item container">'
                 appendString += '<div class="list-item-icon container align-items-center justify-content-center"><span class="feather-icon icon-search"></span></div>'
-                appendString += '<div class="flex-grow-1"><div class=""><h2 class="list-post-title">{{ name }}</h2></div><div class=""><span class="list-post-description">' + description + '</span></div></div></a>'
+                appendString += '<div class="flex-grow-1"><div class=""><h2 class="list-post-title">' + name + '</h2></div><div class=""><span class="list-post-description">' + description + '</span></div></div></a>'
             }
             searchResults.innerHTML = appendString;
         }  else {

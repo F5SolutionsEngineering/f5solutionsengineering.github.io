@@ -3,7 +3,7 @@
     Returning results for repositories with a topic of: {{ page.topic }}
     {% for repository in site.github.public_repositories %}
     {{ repository }}
-    {% if repository.topics contains "{{ page.topic }}" %}
+    {% if repository.topics contains {{ page.topic }} %}
     <div class="margin-top-20 margin-bottom-50">
         <a href="{{ site.url }}/{{ repository.name }}">
             <h2 class="post-title">{{ repository.name }}</h2>

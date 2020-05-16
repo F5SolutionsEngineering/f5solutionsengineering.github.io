@@ -14,8 +14,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Run in container
         run: |
-          chown -R jekyll /__w/automate-one-thing/automate-one-thing/docs
-          cd /__w/automate-one-thing/automate-one-thing/docs
+          chown -R jekyll /__w/
+          cd /__w/f5solutionsengineering.github.io/f5solutionsengineering.github.io/docs
           jekyll build
           gem install html-proofer
-          bundle exec htmlproofer ./_site --disable-external --url-ignore "/automate-one-thing/"
+          bundle exec htmlproofer ./_site --disable-external

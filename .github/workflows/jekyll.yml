@@ -1,0 +1,21 @@
+name: Jekyll
+# This workflow is triggered on pushes to the repository.
+on: [push]
+
+jobs:
+  build:
+    name: Jekyll
+    runs-on: ubuntu-latest
+    container:
+      image: jekyll/builder:3.8
+      volumes:
+        - /home/runner/work/:/svr/jekyll
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run in container
+        run: |
+          chown -R jekyll /__w/automate-one-thing/automate-one-thing/docs
+          cd /__w/automate-one-thing/automate-one-thing/docs
+          jekyll build
+          gem install html-proofer
+          bundle exec htmlproofer ./_site --disable-external --url-ignore "/automate-one-thing/"

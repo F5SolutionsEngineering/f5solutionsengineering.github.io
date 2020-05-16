@@ -15,8 +15,7 @@ jobs:
       - name: Run in container
         run: |
           chown -R jekyll /__w/
-          chown -R jekyll /home/runner/work/_temp/_github_workflow
-          bundle install
           cd /__w/f5solutionsengineering.github.io/f5solutionsengineering.github.io
+          bundle install html-proofer
           jekyll build
           bundle exec htmlproofer ./_site --disable-external

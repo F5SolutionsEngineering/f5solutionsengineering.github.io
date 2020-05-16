@@ -16,6 +16,6 @@ jobs:
         run: |
           chown -R jekyll /__w/
           cd /__w/f5solutionsengineering.github.io/f5solutionsengineering.github.io
-          bundle install html-proofer
+          gem install html-proofer
           jekyll build
           bundle exec htmlproofer ./_site --disable-external

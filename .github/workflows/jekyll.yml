@@ -14,8 +14,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Run in container
         run: |
-          chown -R jekyll /__w/
+          chown -R jekyll /__w/f5solutionsengineering.github.io/f5solutionsengineering.github.io
           cd /__w/f5solutionsengineering.github.io/f5solutionsengineering.github.io
-          gem install html-proofer
           jekyll build
+          gem install html-proofer
           bundle exec htmlproofer ./_site --disable-external

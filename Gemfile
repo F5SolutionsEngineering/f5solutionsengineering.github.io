@@ -18,7 +18,7 @@ group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.12"
 end
 
-gem "jekyll-github-metadata", "~> 0.5.3"
+gem "jekyll-github-metadata", "~> 2.13.0"
 gem "html-proofer", "~> 3.15"
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem

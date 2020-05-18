@@ -10,7 +10,7 @@ This GitHub page uses Jekyll so you will need:
  * Jekyll 4.x+
  * pyspelling
 
-To install Jekyll, please reference the official (installation guide)[https://jekyllrb.com/docs/installation/]: 
+To install Jekyll, please reference the official [installation guide](https://jekyllrb.com/docs/installation/): 
 
 Run the following command to test your changes locally:
 ```bash
